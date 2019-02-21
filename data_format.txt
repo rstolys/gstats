@@ -1,0 +1,106 @@
+File format for storing golf stats 
+
+
+'$CSE' - COURSE_INFO              
+'$RND' - ROUND_INFO
+'$HOL' - HOLE_INFO
+'$SHT' - SHOT_INFO
+
+Course info is followed by following information: 
+$CSE, course name (string), course length (int), course par (int), course rating(float), 
+	course slope (int), hole length/ hole par (int array),
+
+Round info is followed by the following information:
+$RND, course name(string), date played (string), number of holes played (int), 
+	tournament round (bool), round number* (int),
+
+* round number refers to a linearly incrementing round in the database
+
+Hole information is followed by the following information:
+$HOL, hole number (int), hole length (int), hole par (int),
+
+Shot information is followed by the following information:
+$SHT, shot number (int), shot type (string), distance to hole (int), lie (string), miss direction (string), 
+	fwy hit (bool), green hit (bool), holed (bool)
+
+
+
+Example of storage: 
+#GOLF STATISICS DATA FILE: DO NOT MODIFY
+#	Created on: "Date/Time"
+#	Created by: Ryan Stolys
+
+
+
+
+#			ROUND DATA
+$RND, VGC, 12/01/19, 9, 0, 1
+$HOL,1,398,4
+$SHT,1,DRV,398,TEE,LFT,0,-,0
+$SHT,2,APP,116,RGH,-,-,1,0
+$SHT,3,PUT,23,GRN,-,-,-,0
+$SHT,4,PUT,3,GRN,-,-,-,1
+$HOL,2,352,4
+$SHT,1,DRV,352,TEE,-,1,1,-,0
+...
+$HOL,3,165,3
+$SHT,1,APP,153,TEE,RHT,-,0,0
+$SHT,2,CHP,18,RGH,-,-,1,0 
+$SHT,3,PUT,7,GRN,-,-,-,1 
+...
+$HOL,6,643,5
+$SHT,1,DRV,643,TEE,FWY,0,-,0
+$SHT,2,APP,312,FWY,-,0,0
+$SHT,3,APP,73,FWY,-,1,0
+$SHT,4,PUT,8,GRN,-,-,1
+...
+
+
+$CSE,EQC,2012,54,54.0,110,1 109 3,2 98 3,3 139 3,4 114 3,5 77 3,6 147 3,7 147 3,8 123 3,9 104 3,10 109 3,11 98 3,12 139 3,13 114 3,14 77 3,15 147 3,16 95 3,17 123 3,18 104 3,
+
+
+#			COURSE DATA
+$CSE,VGC,6943,71,72.3,132,1 398 4,2 352 4,3 165 3,4 412 4, ect...
+
+
+
+
+Each line will be a new data stream with the type of stream being the first element
+
+All approach shots, drives, and chips are measured in yards while putts will be in feet
+Some infomration will not be requested but must be inferred based on the entry elements
+	tee shot does not require distance unless it is par 3
+
+
+legend of element entries:
+'-' = no entry 
+shot type:
+'DRV' = drive
+'APP' = appoach 
+'CHP' = chip 
+'SND' = sand
+'PUT' = putt 
+lie type:
+'TEE' = tee
+'FWY' = fairway
+'RGH' = rough 
+'SND' = sand
+'GRN' = green
+miss directions
+'LFT' = left
+'RHT' = right 
+
+
+To read file:
+	getline each line in file
+	break into tokens split on commas
+	determine data type based on first element in stream 
+	send to parsing function to deal with data type
+
+
+Data entry to gather this information will be challenging to make it intuitive but is important that it be INTUITIVE 
+	ideas could be a series of questions in succession 
+	easier if it is on a website 
+	can start basic and expand as I learn more about website creation and integration of 			other languages/ programs together.   
+
+

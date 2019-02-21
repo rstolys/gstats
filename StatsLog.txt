@@ -1,0 +1,18 @@
+File Open
+First Element # #GOLF STATISICS DATA FILE: DO NOT MODIFY-end
+First Element # #	Created on: Sun Feb 17 09:59:21 2019-end
+First Element # #	Created by: Ryan Stolys-end
+First Element # #-end
+First Element # #-end
+First Element # #-end
+First Element # #			ROUND DATA-end
+First Element # #-end
+First Element # #-end
+First Element # #-end
+First Element # #-end
+First Element # #			COURSE DATA-end
+First Element # $CSE-end
+Added Course # 1
+vector len: 1
+element: EQC
+index: 0

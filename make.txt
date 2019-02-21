@@ -1,0 +1,3 @@
+#MAKEFILE 
+
+g++ main.cpp fill_data.cpp read_data.cpp new_course.cpp new_round.cpp -o gstats
