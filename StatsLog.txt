@@ -1,6 +1,6 @@
 File Open
 First Element # #GOLF STATISICS DATA FILE: DO NOT MODIFY-end
-First Element # #	Created on: Sun Feb 17 09:59:21 2019-end
+First Element # #	Created on: Fri Mar  1 21:08:32 2019-end
 First Element # #	Created by: Ryan Stolys-end
 First Element # #-end
 First Element # #-end
@@ -15,4 +15,26 @@ First Element # $CSE-end
 Added Course # 1
 vector len: 1
 element: EQC
-index: 0
+element: 2012
+element: 54
+element: 54.0
+element: 110
+element: 1 109 3
+element: 2 98 3
+element: 3 139 3
+element: 4 114 3
+element: 5 77 3
+element: 6 147 3
+element: 7 147 3
+element: 8 123 3
+element: 9 104 3
+element: 10 109 3
+element: 11 98 3
+element: 12 139 3
+element: 13 114 3
+element: 14 77 3
+element: 15 147 3
+element: 16 95 3
+element: 17 123 3
+element: 18 104 3
+First Element # #-end

@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+using namespace std;
+
 // Defintions  
 
 // Data Steam types
@@ -64,10 +66,10 @@ class oShots
         }
 
         int             iShotNum;
-        std::string     sType;
+        string          sType;
         int             iDistance;        
-        std::string     sLie; 
-        std::string     sMiss;           
+        string          sLie; 
+        string          sMiss;           
         bool            bFairway;       
         bool            bGreen;       
         bool            bHoled; 
@@ -78,7 +80,7 @@ class oHoles
     public:
         oHoles() {}
 
-        std::vector<oShots> vShot;
+        vector<oShots> vShot;
         int                 iNumber; 
         int                 iLength; 
         int                 iPar; 
@@ -90,8 +92,8 @@ class oRounds
         //No initalizer to all for added element without values
         oRounds() {}
 
-        std::string     sCourse; 
-        std::string     sDate;
+        string          sCourse; 
+        string          sDate;
         int             iNumHoles; 
         bool            bTournament;
         int             iRndNum;
@@ -117,7 +119,7 @@ class oCourse
     public:
         oCourse() {}
   
-        std::string     sName; 
+        string          sName; 
         int             iLength;
         int             iPar; 
         float           fRating;
@@ -177,6 +179,6 @@ void clear_screen();
 /// @param[in]  sFileName   name of copy file
 ///
 ///////////////////////////////////////////////////////////
-void copy_file( std::string sFileName, std::string sFileName_copy );
+void copy_file( string sFileName, string sFileName_copy );
 
 #endif

@@ -12,6 +12,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <string>
+#include <sstream>
 #include <fstream> 
 #include <vector>
 #include <ctime>
@@ -107,8 +108,7 @@ void vParseGolf( string sFileName, string sFileName_copy, vector<oRounds>* pvDat
             int iShotNum = 0; 
 
             //Loop for each token in line, the order is known
-            while ( szElement != 0 ) {
-                szElement = strtok( NULL, "," );
+            while ( NULL != (szElement = strtok( NULL, "," )) ) {
                 
 
                 switch ( eShotElement ) {
@@ -220,9 +220,7 @@ void vParseGolf( string sFileName, string sFileName_copy, vector<oRounds>* pvDat
         else if ( !strcmp(HOLE_INFO, szElement) ) {
             
             //Loop for each token in line, the order is known
-            while (szElement != 0 ) {
-
-                szElement = strtok( NULL, "," );
+            while ( NULL != (szElement = strtok( NULL, "," )) ) {
                 
                 //For each element, save variable
                 //Save data into correct location 
@@ -271,8 +269,7 @@ void vParseGolf( string sFileName, string sFileName_copy, vector<oRounds>* pvDat
             (*piNumRounds)++;
 
             //Loop for each token in line, the order is known
-            while (szElement != 0 ) {
-                szElement = strtok( NULL, "," );
+            while ( NULL != (szElement = strtok( NULL, "," )) ) {
                 
                 //For each element, save variable
                 //Save data into correct location 
@@ -344,8 +341,9 @@ void vParseGolf( string sFileName, string sFileName_copy, vector<oRounds>* pvDat
         }
         else if ( !strcmp(COURSE_INFO, szElement) ) {
 
-            int iHoleNum = 1;
-            
+            //Start at 0 for array index
+            int     iHoleNum = 0;
+
             //Add course to database
             pvCourses->push_back(oCourse());
 
@@ -357,9 +355,7 @@ void vParseGolf( string sFileName, string sFileName_copy, vector<oRounds>* pvDat
 
 
             //Loop for each token in line, the order is known
-            while (szElement != 0 ) {
-
-                szElement = strtok( NULL, "," );
+            while ( NULL != (szElement = strtok( NULL, "," )) ) {
 
                 ofStatsLog << "element: " << szElement << endl;
                 
@@ -367,17 +363,11 @@ void vParseGolf( string sFileName, string sFileName_copy, vector<oRounds>* pvDat
 
                     case COURSE_NAME:
 
-                        ofStatsLog << "index: " << (*piNumCourses - 1 ) << endl;
-
                         //Save name of course
-                        pvCourses->at( *piNumRounds - 1 ).sName = szElement;
-
-                        ofStatsLog << "progress " << endl;
+                        pvCourses->at( *piNumCourses - 1 ).sName = szElement;
 
                         //Move to next element
                         eCourseElement = COURSE_LENGTH;
-
-                        ofStatsLog << "progress 2" << endl;
 
                         break;
 
@@ -398,6 +388,8 @@ void vParseGolf( string sFileName, string sFileName_copy, vector<oRounds>* pvDat
 
                         //Move to next element
                         eCourseElement = RATING;
+
+                        break;
 
                     case RATING:
 
@@ -425,7 +417,7 @@ void vParseGolf( string sFileName, string sFileName_copy, vector<oRounds>* pvDat
                         vParseHoles( szElement, pvCourses, iHoleNum, *piNumCourses );
 
                         //if all holes have been parsed
-                        if(17 < iHoleNum) {
+                        if(16 < iHoleNum) {
 
                             //Reset Incrementor
                             eCourseElement = COURSE_NAME;
@@ -435,7 +427,7 @@ void vParseGolf( string sFileName, string sFileName_copy, vector<oRounds>* pvDat
                             //Increment to next hole
                             iHoleNum++; 
                         }
-                       
+
                         break;
 
                 }
@@ -481,27 +473,23 @@ void vParseGolf( string sFileName, string sFileName_copy, vector<oRounds>* pvDat
 //////////////////////////////////////////////////////////////////////////
 void vParseHoles( char *szElement, vector<oCourse> *pvCourses, int iHoleNum, int iNumCourses ) {
 
-    char            *szHoleElement; 
     holeElement_t   eHoleElement = HOLE_NUM;
 
-    //Get first token
-    szHoleElement = strtok( szElement, " " );   
+    stringstream    szHoleElement;
+
+    //Create String stream for reading 
+    szHoleElement << szElement;
 
     //Save hole number 
-    pvCourses->at(iNumCourses - 1).spInfo[ iHoleNum ].iNumber = atoi( szHoleElement );
-
-    //Get next token
-    szHoleElement = strtok( NULL, " " );
+    szHoleElement >> pvCourses->at(iNumCourses - 1).spInfo[ iHoleNum ].iNumber;
 
     //Save hole length 
-    pvCourses->at( iNumCourses - 1 ).spInfo[ iHoleNum ].iLength = atoi( szHoleElement );
-
-    //Get Last token
-    szHoleElement = strtok( NULL, " " );
+    szHoleElement >> pvCourses->at( iNumCourses - 1 ).spInfo[ iHoleNum ].iLength;
 
     //Save hole length 
-    pvCourses->at( iNumCourses - 1 ).spInfo[ iHoleNum ].iPar = atoi( szHoleElement );
+    szHoleElement >> pvCourses->at( iNumCourses - 1 ).spInfo[ iHoleNum ].iPar;
 
+    return;
 }
 
 ///////////////////////////////////////////////////////////
